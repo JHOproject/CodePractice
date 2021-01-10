@@ -9,18 +9,9 @@ For example, the string "This website is for losers LOL!" would become "Ths wbst
 
 Note: for this kata y isn't considered a vowel.
 ## Test
-```Test.assertEquals(disemvowel("This website is for losers LOL!"),
-  "Ths wbst s fr lsrs LL!")```
+```Test.assertEquals(disemvowel("This website is for losers LOL!"),"Ths wbst s fr lsrs LL!")```
 ## My Solution
-```function disemvowel(str) {
-  let test = /[aeiouAEIOU]/g;
-
-  return str.replace(test,'');
-}
-
-disemvowel("This website is for losers LOL!");```
+```function disemvowel(str) { let test = /[aeiouAEIOU]/g; return str.replace(test,'');}disemvowel("This website is for losers LOL!");```
 
 ## Best Practice
-```function disemvowel(str) {
-  return str.replace(/[aeiou]/gi, '');
-}```
+```function disemvowel(str) {return str.replace(/[aeiou]/gi, '');}```
