@@ -1,5 +1,4 @@
-# Task:Disemvowel Trolls
-Trolls are attacking your comment section!
+# Task:Trolls are attacking your comment section!
 
 A common way to deal with this situation is to remove all of the vowels from the trolls' comments, neutralizing the threat.
 
@@ -16,7 +15,6 @@ Test.assertEquals(disemvowel("This website is for losers LOL!"),"Ths wbst s fr l
 ```javascript
 function disemvowel(str) { let test = /[aeiouAEIOU]/g; return str.replace(test,'');}disemvowel("This website is for losers LOL!");
 ```
-
 ## Best Practice
 ```javascript
 function disemvowel(str) {return str.replace(/[aeiou]/gi, '');}
