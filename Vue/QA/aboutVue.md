@@ -1,3 +1,4 @@
+<!-- TODO:什麼是vue生命週期？對vue生命週期的理解？ -->
 # 關於 MVVM
 > ## 什麼是 MVVM
 <回答1><br>
@@ -156,7 +157,7 @@ addObjB () {
     }
 ```
 
-> ## <keep-alive> </keep-alive>的作用是什麼
+> ## `<keep-alive> </keep-alive>`的作用是什麼
 
 > ## active-class是哪個組件的屬性
 
