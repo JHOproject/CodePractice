@@ -31,7 +31,7 @@ function duplicateCount(text){
   return Object.keys(result).length;
 }
 ```
-## Best Practice
+## Other Solutions
 ```javascript
 function duplicateCount(text){
   return (text.toLowerCase().split('').sort().join('').match(/([^])\1+/g) || []).length;

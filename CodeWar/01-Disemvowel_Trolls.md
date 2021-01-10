@@ -15,7 +15,7 @@ Test.assertEquals(disemvowel("This website is for losers LOL!"),"Ths wbst s fr l
 ```javascript
 function disemvowel(str) { let test = /[aeiouAEIOU]/g; return str.replace(test,'');}disemvowel("This website is for losers LOL!");
 ```
-## Best Practice
+## Other Solutions
 ```javascript
 function disemvowel(str) {return str.replace(/[aeiou]/gi, '');}
 ```
