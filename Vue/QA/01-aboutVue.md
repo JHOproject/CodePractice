@@ -197,17 +197,17 @@ mvc 和 mvvm 其實區別並不大。都是一種設計思想。主要就是 mvc
 * 髒值檢查（angular.js）
   angular.js 是通過髒值檢測的方式比對數據是否有變更，來決定是否更新視圖，最簡單的方式就是通過 `setInterval()` 定時輪詢檢測數據變動。
 
-  angular只有在指定的事件觸發時進入髒值檢測，大致如下：
-  * DOM事件，譬如用戶輸入文本，點擊按鈕等。如 `ng-click`。
-  * XHR響應事件：`$http`。
-  * 瀏覽器Location變更事件： `$location`。
-  * Timer事件：`$timeout` , `$interval`。
+  angular 只有在指定的事件觸發時進入髒值檢測，大致如下：
+  * DOM 事件，譬如用戶輸入文本，點擊按鈕等。如 `ng-click`。
+  * XHR 響應事件：`$http`。
+  * 瀏覽器 Location 變更事件： `$location`。
+  * Timer 事件：`$timeout` , `$interval`。
   * 執行 `$digest()` 或 `$apply()`。
 
 
 * 數據劫持（vue.js）
 
-  vue.js 則是採用數據劫持結合發布者-訂閱者模式的方式，通過Object.defineProperty()來劫持各個屬性的setter，getter，在數據變動時發布消息給訂閱者，觸發相應的監聽回調。
+  vue.js 則是採用數據劫持結合發布者-訂閱者模式的方式，通過 `Object.defineProperty()`來劫持各個屬性的 setter，getter，在數據變動時發布消息給訂閱者，觸發相應的監聽回調。
 
   ##### *補充：在Vue3.0放棄了 `Object.defineProperty()` ，採用原生Proxy對象*
 
