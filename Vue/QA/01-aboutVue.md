@@ -45,7 +45,7 @@
 # 一、關於 MVVM
 
 > ## 什麼是 MVVM
-<回答1>
+**<回答1>**
 
 MVVM分為Model、View、ViewModel三者：
 
@@ -442,4 +442,11 @@ vue-router 模塊的 router-link 組件。
 * 在配置路由時，頁面和元件使用懶載入的方式引入，進一步縮小 app.bundel 的體積，在呼叫某個元件時再載入對應的 js 檔案。
 * 加一個首屏 loading 圖，提升使用者體驗
 
+---
 
+#### *內文來源*
+* #### *[2019前端面試題彙總（主要為Vue）](https://www.mdeditor.tw/pl/2U6o/zh-tw"2019前端面試題彙總（主要為Vue）")*
+* #### *[年底前端面試vue總結](https://codertw.com/%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80/756634/#outline__1"https://codertw.com/%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80/756634/#outline__1")*
+* #### *[2019年web前端Vue面試題總結](https://kknews.cc/zh-tw/code/4k29znq.html"2019年web前端Vue面試題總結")*
+* #### *[2019前端面試系列——Vue面試題](https://www.itread01.com/content/1564416182.html"2019前端面試系列——Vue面試題")*
+* #### *[81道經典Vue試題總結](https://www.itread01.com/content/1543596364.html"81道經典Vue試題總結")*
