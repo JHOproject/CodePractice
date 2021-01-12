@@ -47,13 +47,22 @@
 > ## 什麼是 MVVM
 **<回答1>**
 
-MVVM分為Model、View、ViewModel三者：
+MVVM 是 Model-View-ViewModel 的縮寫。MVVM 是一種設計思想，共分為 Model、View、ViewModel 三者：
 
-1. Model：資料模型，資料和業務邏輯都在 Model 層中定義。
+* Model
+  * 資料模型，資料和業務邏輯都在 Model 層中定義。
+  * 管理資料來源如API和本地資料庫。
+  * 管理所有的資料來源，例如API、資料庫和 SharedPreference，當ViewModel 來請求資料時從正確的來源取得資料並回傳。
 
-2. View：UI 檢視，負責資料的展示。
+* View
+  * UI 檢視，負責資料的展示。
+  * 顯示UI和接收使用者動作。
+  * 是 Activity、Fragment 或 custom view，本身不做邏輯處理，當使用者跟 UI有互動時將指令傳給 ViewModel 處理，透過其獲得所需的資料並顯示。
 
-3. ViewModel：負責監聽 Model 中資料的改變並且控制檢視的更新，處理使用者互動操作。
+* ViewModel
+  * 負責監聽 Model 中資料的改變並且控制檢視的更新，處理使用者互動操作。
+  * 從Model取得View所需的資料。
+  * 接收View的指令並對Model請求資料，將取得的資料保存起來供View使用。
 
   Model 和 View 並無直接關聯，而是通過 ViewModel 來進行聯絡，Model 和 ViewModel 之間有著雙向資料繫結的聯絡。因此當 Model 中的資料改變時會觸發 View 層的重新整理，View 中由於使用者互動操作而改變的資料也會在 Model 中同步。
   
@@ -61,14 +70,93 @@ MVVM分為Model、View、ViewModel三者：
 
 **<回答2>**
 
-MVVM 是 Model-View-ViewModel 的縮寫。mvvm 是一種設計思想。Model 層代表數據模型，也可以在 Model 中定義數據修改和操作的業務邏輯；View 代表 UI 組件，它負責將數據模型轉化成 UI 展現出來，ViewModel 是一個同步 View 和 Model 的對象。
+MVVM 是 Model-View-ViewModel 的縮寫。MVVM 是一種設計思想。Model 層代表數據模型，也可以在 Model 中定義數據修改和操作的業務邏輯；View 代表 UI 組件，它負責將數據模型轉化成 UI 展現出來，ViewModel 是一個同步 View 和 Model 的對象。
 
 在 MVVM 架構下，View 和 Model 之間並沒有直接的聯繫，而是通過 ViewModel 進行交互，Model 和 ViewModel 之間的交互是雙向的， 因此 View 數據的變化會同步到 Model 中，而 Model 數據的變化也會立即反應到 View 上。
 
 ViewModel 通過雙向數據綁定把 View 層和 Model 層連接了起來，而 View 和 Model 之間的同步工作完全是自動的，無需人為干涉，因此開發者只需關注業務邏輯，不需要手動操作 DOM, 不需要關注數據狀態的同步問題，複雜的數據狀態維護完全由 MVVM 來統一管理。
 
-> ## 和 MVC、其它框架（jquery）的區別？哪些場景適合？
+> ## 和 MVC、MVP其它框架（jquery）的區別？哪些場景適合？
+**<回答1>**
+
 mvc 和 mvvm 其實區別並不大。都是一種設計思想。主要就是 mvc 中 Controller 演變成 mvvm 中的 viewModel。mvvm 主要解決了 mvc 中大量的 DOM 操作使頁面渲染性能降低，加載速度變慢，影響用戶體驗。和當 Model 頻繁發生變化，開發者需要主動更新到 View 。
+
+**<回答2>**
+
+* MVP（Model View Controller）
+  
+  * 原理
+
+    * Model層：模型（用於封裝業務邏輯相關的數據以及對數據的操縱）
+
+    * View層：視圖（渲染圖形化介面，也就是所謂的UI介面）
+
+    * Controller層：控制器（M和V之間的連接器，主要處理業務邏輯，包括顯示數據，介面跳轉，管理頁面生命周期等）
+
+  * 標準MVC
+
+    當有用戶的行為觸發操作時，控制器（Controller）更新模型，並通知視圖（V）和模型（M）更新，這時視圖（V）就會向模型（M）請求新的數據，這就是標準MVC模式下Model，View 和 Controller 之間的協作方式。
+  * MVC優點：
+
+    * 耦合性低，視圖層和業務層分離，這樣就允許更改視圖層代碼而不用重新編譯模型和控制器代碼。
+    
+    * 重用性高
+    
+    * 生命周期成本低
+    
+    * MVC使開發和維護用戶接口的技術含量降低
+    
+    * 可維護性高，分離視圖層和業務邏輯層也使得WEB應用更易於維護和修改部署快
+  
+  * MVC缺點：
+    
+    * 不適合小型，中等規模的應用程式，花費大量時間將MVC應用到規模並不是很大的應用程式通常會得不償失。
+    
+    * 視圖與控制器間過於緊密連接，視圖與控制器是相互分離，但卻是聯繫緊密的部件，視圖沒有控制器的存在，其應用是很有限的，反之亦然，這樣就妨礙了他們的獨立重用。
+    
+    * 視圖對模型數據的低效率訪問，依據模型操作接口的不同，視圖可能需要多次調用才能獲得足夠的顯示數據。對未變化數據的不必要的頻繁訪問，也將損害操作性能。
+
+* MVP（Model View Presenter）
+
+  由MVC演變而來，它和MVC的相同之處在於：Controller / Presente都是負責業務邏輯，Model管理數據，View負責顯示。不過在MVP中View並不直接與Model交互，它們之間的通信是通過Presenter (MVC中的Controller)來進行的，即使用 Presenter 對視圖和模型進行了解耦，讓它們彼此都對對方一無所知，溝通都通過 Presenter 進行。
+
+  * 原理
+    
+    * Model層：模型（用於封裝業務邏輯相關的數據以及對數據的操縱）。
+    
+    * View層：視圖（渲染圖形化介面，也就是所謂的UI介面）。
+    
+    * Presenter層：控制器（M和V之間的連接器，主要處理業務邏輯，包括顯示數據，介面跳轉，管理頁面生命周期等）。
+  
+  * 標準MVP
+  
+    在 MVP 中，Presenter 可以理解為鬆散的控制器，其中包含了視圖的 UI 業務邏輯，所有從視圖發出的事件，都會通過代理給 Presenter 進行處理；同時，Presenter 也通過視圖暴露的接口與其進行通信。
+  
+  * MVP特點
+    
+    M、V、P之間雙向通信。
+    
+    View 與 Model 不通信，都通過 Presenter 傳遞。Presenter完全把Model和View進行了分離，主要的程序邏輯在Presenter里實現。
+    
+    View 非常薄，不部署任何業務邏輯，稱為」被動視圖」（Passive View），即沒有任何主動性，而 Presenter非常厚，所有邏輯都部署在那裡。
+    
+    Presenter與具體的View是沒有直接關聯的，而是通過定義好的接口進行交互，從而使得在變更View時候可以保持Presenter的不變，這樣就可以重用。不僅如此，還可以編寫測試用的View，模擬用戶的各種操作，從而實現對Presenter的測試–從而不需要使用自動化的測試工具。
+  
+  * MVP優點：
+
+    * 模型與視圖完全分離，我們可以修改視圖而不影響模型。
+    
+    * 可以更高效地使用模型，因為所有的交互都發生在一個地方——Presenter內部。
+    
+    * 我們可以將一個Presenter用於多個視圖，而不需要改變Presenter的邏輯。這個特性非常的有用，因為視圖的變化總是比模型的變化頻繁。
+    
+    * 如果我們把邏輯放在Presenter中，那麼我們就可以脫離用戶接口來測試這些邏輯（單元測試）。
+  
+  * MVP缺點：
+
+    * 視圖和Presenter的交互會過於頻繁，使得他們的聯繫過於緊密。也就是說，一旦視圖變更了，presenter也要變更。
+
+> ## 常見的實現MVVM幾種方式
 
 ---
 
@@ -443,7 +531,7 @@ vue-router 模塊的 router-link 組件。
 * 加一個首屏 loading 圖，提升使用者體驗
 
 ---
-
+#
 #### *內文來源*
 * #### *[2019前端面試題彙總（主要為Vue）](https://www.mdeditor.tw/pl/2U6o/zh-tw"2019前端面試題彙總（主要為Vue）")*
 * #### *[年底前端面試vue總結](https://codertw.com/%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80/756634/#outline__1"https://codertw.com/%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80/756634/#outline__1")*
