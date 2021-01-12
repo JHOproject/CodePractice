@@ -1,14 +1,14 @@
 # 目錄
-* 關於 MVVM
+* 一、關於 MVVM
   * 什麼是 MVVM
   * 和 MVC、其它框架（jquery）的區別？哪些場景適合？
-* 關於 Vue
+* 二、關於 Vue
   * Vue 的優點
   * 描述 Vue 從「初始化頁面→修改資料重新整理頁面→UI」的過程
   * Vue 和 React 的簡單對比
   * Vue 的 nextTick 原理為何
   * VNode是什麼？虛擬 DOM 是什麼
-* 關於 Vue 的生命週期
+* 三、關於 Vue 的生命週期
   * 什麼是 Vue 生命周期
   * Vue 生命周期的作用是什麼
   * Vue 生命周期總共有幾個階段
@@ -16,7 +16,7 @@
   * 第一次頁面加載會觸發哪幾個鉤子
   * DOM 渲染在哪個周期中就已經完成
   * 簡單描述每個周期具體適合哪些場景
-* 關於 Vue 的操作
+* 四、關於 Vue 的操作
   * Vue 的響應式原理（Vue Reactivity）
   * Vue 的雙向綁定原理 / Vue 如何在元件內部實現一個雙向資料綁定
   * Vue 元件間通訊的方式（組件間的傳值）
@@ -41,9 +41,8 @@
   * 如何優化 SPA 應用的首屏載入速度慢的問題
 
 ---
----
 
-# 關於 MVVM
+# 一、關於 MVVM
 
 > ## 什麼是 MVVM
 <回答1>
@@ -70,8 +69,8 @@ ViewModel 通過雙向數據綁定把 View 層和 Model 層連接了起來，而
 
 > ## 和 MVC、其它框架（jquery）的區別？哪些場景適合？
 mvc 和 mvvm 其實區別並不大。都是一種設計思想。主要就是 mvc 中 Controller 演變成 mvvm 中的 viewModel。mvvm 主要解決了 mvc 中大量的 DOM 操作使頁面渲染性能降低，加載速度變慢，影響用戶體驗。和當 Model 頻繁發生變化，開發者需要主動更新到 View 。
-
-# 關於 Vue
+---
+# 二、關於 Vue
 
 > ## Vue 的優點
 * 低耦合：視圖（View）可以獨立於 Model 變化和修改，一個 ViewModel 可以綁定到不同的”View”上，當 View 變化的時候 Model 可以不變，當 Model 變化的時候 View 也可以不變。
@@ -136,8 +135,8 @@ mvc 和 mvvm 其實區別並不大。都是一種設計思想。主要就是 mvc
 
 > ## VNode是什麼？虛擬 DOM 是什麼
 Vue在 頁面上渲染的節點，及其子節點稱為「虛擬節點 (Virtual Node)」，簡寫為「VNode」。「虛擬 DOM」是由 Vue 組件樹建立起來的整個 VNode 樹的稱呼。
-
-# 關於 Vue 的生命週期
+---
+# 三、關於 Vue 的生命週期
 
 > ## 什麼是 Vue 生命周期
 Vue 實例從創建到銷毀的過程，就是生命周期。也就是從開始創建、初始化數據、編譯模板、掛載 DOM → 渲染、更新 → 渲染、卸載等一系列過程，我們稱這是 Vue 的生命周期。
@@ -200,8 +199,8 @@ DOM 渲染在 mounted 中已經完成。
 
 * nextTick : 更新數據後立即操作 DOM。
 
-
-# 關於 Vue 的操作
+---
+# 四、關於 Vue 的操作
 
 > ## Vue 的響應式原理（Vue Reactivity）
 當一個 Vue 實例建立時，Vue 會遍歷 data 選項的屬性，用 Object.defineProperty 將它們轉為 getter/setter 並且在內部追蹤相關依賴，在屬性被訪問和修改時通知變化。
