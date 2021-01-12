@@ -1,7 +1,7 @@
 # 關於 Vuex
 
 > ## 什麼是 Vuex（Vuex 原理）
-<回答1>
+**<回答1>**
 
 vue 框架中狀態管理。在 main.js 引入 store，注入。新建了一個目錄 store，….. export 。場景有：單頁應用中，組件之間的狀態。音樂播放、登錄狀態、加入購物車
 ```javascript
@@ -17,7 +17,7 @@ import store from './store'
 ...
 ```
 
-<回答2>
+**<回答2>**
 
 vuex 僅僅是作為 vue 的一個插件而存在，不像 Redux , MobX 等庫可以應用於所有框架，vuex 只能使用在 vue 上，很大的程度是因為其高度依賴於 vue 的 computed 依賴檢測系統以及其插件系統，
 
