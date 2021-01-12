@@ -209,7 +209,7 @@ mvc 和 mvvm 其實區別並不大。都是一種設計思想。主要就是 mvc
 
   vue.js 則是採用數據劫持結合發布者-訂閱者模式的方式，通過 `Object.defineProperty()`來劫持各個屬性的 setter，getter，在數據變動時發布消息給訂閱者，觸發相應的監聽回調。
 
-  ##### *補充：在Vue3.0放棄了 `Object.defineProperty()` ，採用原生Proxy對象*
+  ##### *補充：在Vue3.0放棄了 `Object.defineProperty()` ，採用原生 Proxy 對象*
 
 ---
 
