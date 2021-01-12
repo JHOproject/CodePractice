@@ -83,34 +83,35 @@ mvc 和 mvvm 其實區別並不大。都是一種設計思想。主要就是 mvc
 
 **<回答2>**
 
-* MVP（Model View Controller）
+* MVC（Model View Controller）
+  
+  ![MVC](./img/MVC.jpg)
   
   * 原理
 
-    * Model層：模型（用於封裝業務邏輯相關的數據以及對數據的操縱）
+    當有用戶的行為觸發操作時，控制器（Controller）更新模型，並通知視圖（V）和模型（M）更新，這時視圖（V）就會向模型（M）請求新的數據，這就是標準MVC模式下 Model，View 和 Controller 之間的協作方式。
 
-    * View層：視圖（渲染圖形化介面，也就是所謂的UI介面）
+    * Model 層：模型（用於封裝業務邏輯相關的數據以及對數據的操縱）。
 
-    * Controller層：控制器（M和V之間的連接器，主要處理業務邏輯，包括顯示數據，介面跳轉，管理頁面生命周期等）
+    * View 層：視圖（渲染圖形化介面，也就是所謂的UI介面）。
 
-  * 標準MVC
-
-    當有用戶的行為觸發操作時，控制器（Controller）更新模型，並通知視圖（V）和模型（M）更新，這時視圖（V）就會向模型（M）請求新的數據，這就是標準MVC模式下Model，View 和 Controller 之間的協作方式。
-  * MVC優點：
+    * Controller 層：控制器（M 和 V 之間的連接器，主要處理業務邏輯，包括顯示數據，介面跳轉，管理頁面生命周期等）。
+  
+  * MVC 優點
 
     * 耦合性低，視圖層和業務層分離，這樣就允許更改視圖層代碼而不用重新編譯模型和控制器代碼。
     
-    * 重用性高
+    * 重用性高。
     
-    * 生命周期成本低
+    * 生命周期成本低。
     
-    * MVC使開發和維護用戶接口的技術含量降低
+    * MVC 使開發和維護用戶接口的技術含量降低。
     
-    * 可維護性高，分離視圖層和業務邏輯層也使得WEB應用更易於維護和修改部署快
+    * 可維護性高，分離視圖層和業務邏輯層也使得WEB應用更易於維護和修改部署快。
   
-  * MVC缺點：
+  * MVC 缺點
     
-    * 不適合小型，中等規模的應用程式，花費大量時間將MVC應用到規模並不是很大的應用程式通常會得不償失。
+    * 不適合小型，中等規模的應用程式，花費大量時間將 MVC 應用到規模並不是很大的應用程式通常會得不償失。
     
     * 視圖與控制器間過於緊密連接，視圖與控制器是相互分離，但卻是聯繫緊密的部件，視圖沒有控制器的存在，其應用是很有限的，反之亦然，這樣就妨礙了他們的獨立重用。
     
@@ -118,45 +119,97 @@ mvc 和 mvvm 其實區別並不大。都是一種設計思想。主要就是 mvc
 
 * MVP（Model View Presenter）
 
-  由MVC演變而來，它和MVC的相同之處在於：Controller / Presente都是負責業務邏輯，Model管理數據，View負責顯示。不過在MVP中View並不直接與Model交互，它們之間的通信是通過Presenter (MVC中的Controller)來進行的，即使用 Presenter 對視圖和模型進行了解耦，讓它們彼此都對對方一無所知，溝通都通過 Presenter 進行。
+  ![MVP](./img/MVP.jpg)
+
+  由 MVC 演變而來，它和 MVC 的相同之處在於：Controller / Presenter 都是負責業務邏輯，Model 管理數據，View 負責顯示。不過在 MVP 中 View 並不直接與 Model 交互，它們之間的通信是通過 Presenter（MVC 中的 Controller）來進行的，即使用 Presenter 對視圖和模型進行了解耦，讓它們彼此都對對方一無所知，溝通都通過 Presenter 進行。
 
   * 原理
     
+    在 MVP 中，Presenter 可以理解為鬆散的控制器，其中包含了視圖的 UI 業務邏輯，所有從視圖發出的事件，都會通過代理給 Presenter 進行處理；同時，Presenter 也通過視圖暴露的接口與其進行通信。
+
     * Model層：模型（用於封裝業務邏輯相關的數據以及對數據的操縱）。
     
     * View層：視圖（渲染圖形化介面，也就是所謂的UI介面）。
     
     * Presenter層：控制器（M和V之間的連接器，主要處理業務邏輯，包括顯示數據，介面跳轉，管理頁面生命周期等）。
   
-  * 標準MVP
+  * MVP 特點
+    
+    * M、V、P 之間雙向通信。
+    
+    * View 與 Model 不通信，都通過 Presenter 傳遞。Presenter 完全把 Model 和 View 進行了分離，主要的程序邏輯在 Presenter 裡實現。
+    
+    * View 非常薄，不部署任何業務邏輯，稱為「被動視圖」（Passive View），即沒有任何主動性，而 Presenter 非常厚，所有邏輯都部署在那裡。
+    
+    * Presenter 與具體的 View 是沒有直接關聯的，而是通過定義好的接口進行交互，從而使得在變更 View 時候可以保持 Presenter 的不變，這樣就可以重用。不僅如此，還可以編寫測試用的 View，模擬用戶的各種操作，從而實現對 Presenter 的測試–從而不需要使用自動化的測試工具。
   
-    在 MVP 中，Presenter 可以理解為鬆散的控制器，其中包含了視圖的 UI 業務邏輯，所有從視圖發出的事件，都會通過代理給 Presenter 進行處理；同時，Presenter 也通過視圖暴露的接口與其進行通信。
-  
-  * MVP特點
-    
-    M、V、P之間雙向通信。
-    
-    View 與 Model 不通信，都通過 Presenter 傳遞。Presenter完全把Model和View進行了分離，主要的程序邏輯在Presenter里實現。
-    
-    View 非常薄，不部署任何業務邏輯，稱為」被動視圖」（Passive View），即沒有任何主動性，而 Presenter非常厚，所有邏輯都部署在那裡。
-    
-    Presenter與具體的View是沒有直接關聯的，而是通過定義好的接口進行交互，從而使得在變更View時候可以保持Presenter的不變，這樣就可以重用。不僅如此，還可以編寫測試用的View，模擬用戶的各種操作，從而實現對Presenter的測試–從而不需要使用自動化的測試工具。
-  
-  * MVP優點：
+  * MVP 優點
 
     * 模型與視圖完全分離，我們可以修改視圖而不影響模型。
     
-    * 可以更高效地使用模型，因為所有的交互都發生在一個地方——Presenter內部。
+    * 可以更高效地使用模型，因為所有的交互都發生在一個地方—— Presenter 內部。
     
-    * 我們可以將一個Presenter用於多個視圖，而不需要改變Presenter的邏輯。這個特性非常的有用，因為視圖的變化總是比模型的變化頻繁。
+    * 我們可以將一個 Presenter 用於多個視圖，而不需要改變 Presenter 的邏輯。這個特性非常的有用，因為視圖的變化總是比模型的變化頻繁。
     
-    * 如果我們把邏輯放在Presenter中，那麼我們就可以脫離用戶接口來測試這些邏輯（單元測試）。
+    * 如果我們把邏輯放在 Presenter 中，那麼我們就可以脫離用戶接口來測試這些邏輯（單元測試）。
   
-  * MVP缺點：
+  * MVP 缺點
 
-    * 視圖和Presenter的交互會過於頻繁，使得他們的聯繫過於緊密。也就是說，一旦視圖變更了，presenter也要變更。
+    * 視圖和 Presenter 的交互會過於頻繁，使得他們的聯繫過於緊密。也就是說，一旦視圖變更了，Presenter 也要變更。
+
+* MVVM（Model View ViewModel）
+  
+  ![MVVM](./img/MVVM.jpg)
+
+  早在 2004 年，Martin Fowler 發表了一篇名為 Presentation Model （以下簡稱為 PM 模式）的文章，PM 模式與 MVP 比較相似，它從視圖層中分離了行為和狀態；PM 模式中創建了一個視圖的抽象，叫做 Presentation Model，而視圖也成為了這個模型的『渲染』結果。MVVM 與 Martin Fowler 所說的 PM 模式其實是完全相同的，Fowler 提出的 PM 模式是一種與平台無關的創建視圖抽象的方法，而 Gossman 的 MVVM 是專門用於 WPF 框架來簡化用戶介面的創建的模式；我們可以認為 MVVM 是在 WPF 平台上對於 PM 模式的實現。
+
+  ##### *WPF（Windows Presentation Foundation – 微軟推出的基於Windows 的用戶介面框架）*
+
+  作為 Martin Fowler 在 2004 年提出的概念，Presentation Model 到今天其實也是非常先進的，PM 模式將視圖中的全部狀態和行為放到一個單獨的展示模型中，協調領域對象（模型）並且為視圖層提供一個接口。在監督控制器（Controller）中，視圖層與模型層中的一些簡單屬性進行綁定，在模型屬性變化時直接更新視圖（耦合），而 PM 通過引入展示模型將模型層中的數據與複雜的業務邏輯封裝成屬性與簡單的數據同時暴露給視圖，讓視圖和展示模型中的屬性進行同步。這樣看起來好像與MVP差別不大，但兩者最大的區別就在於視圖和展示模型之間狀態的同步，即數據雙向綁定。
+
+  * MVVM 優點
+
+    MVVM 模式和 MVC 模式類似，主要目的是分離視圖（View）和模型（Model），有幾大優點：
+
+    * 低耦合，視圖（View）可以獨立於 Model 變化和修改，一個 ViewModel 可以綁定到不同的 View 上，當 View 變化的時候 Model 可以不變，當 Model 變化的時候 View 也可以不變。
+    
+    * 可重用性，可以把一些視圖邏輯放在一個 ViewModel 裡面，讓很多 view 重用這段視圖邏輯。
+    
+    * 獨立開發，開發人員可以專注於業務邏輯和數據的開發（ViewModel），設計人員可以專注於頁面設計，使用 Expression Blend 可以很容易設計介面並生成 XML 代碼。
+    
+    * 可測試，介面向來是比較難於測試的，而現在測試可以針對 ViewModel 來寫。
+  
+**總結**
+
+從 MVC 架構模式到 MVVM，從分離展示層到展示模型層，經過幾十年的發展和演變，MVC 架構模式出現了各種各樣的變種，並在不同的平台上有著自己的實現。
+
+在架構模式的選用時，我們往往沒有太多的發言權，主要因為平台本身往往對應用層有著自己的設計，我們在開發客戶端或者前端應用時，只需要遵循平台固有的設計就可以完成應用的開發；不過，在有些時候，由於工程變得龐大、業務邏輯變得異常複雜，我們也可以考慮在原有的架構之上實現一個新的架構以滿足工程上的需要。
+
+各種架構模式的作用就是分離關注，將屬於不同模塊的功能分散到合適的位置中，同時儘量降低各個模塊的相互依賴並且減少需要聯繫的膠水代碼。文中對於 MVC、MVP 和 MVVM 架構模式的描述很難不摻雜作者的主觀意見，如果對文章中的內容有疑問，歡迎提出不同的意見進行討論。
 
 > ## 常見的實現MVVM幾種方式
+* 發布者-訂閱者模式（backbone.js）
+
+  一般通過 sub,pub 的方式實現數據和視圖的綁定監聽，更新數據方式通常做法是 `vm.set('property', value)`。
+
+  這種方式現在畢竟太low了，我們更希望通過 `vm.property = value`這種方式更新數據，同時自動更新視圖，於是有了下面兩種方式。
+
+* 髒值檢查（angular.js）
+  angular.js 是通過髒值檢測的方式比對數據是否有變更，來決定是否更新視圖，最簡單的方式就是通過 `setInterval()` 定時輪詢檢測數據變動。
+
+  angular只有在指定的事件觸發時進入髒值檢測，大致如下：
+  * DOM事件，譬如用戶輸入文本，點擊按鈕等。如 `ng-click`。
+  * XHR響應事件：`$http`。
+  * 瀏覽器Location變更事件： `$location`。
+  * Timer事件：`$timeout` , `$interval`。
+  * 執行 `$digest()` 或 `$apply()`。
+
+
+* 數據劫持（vue.js）
+
+  vue.js 則是採用數據劫持結合發布者-訂閱者模式的方式，通過Object.defineProperty()來劫持各個屬性的setter，getter，在數據變動時發布消息給訂閱者，觸發相應的監聽回調。
+
+  ##### *補充：在Vue3.0放棄了 `Object.defineProperty()` ，採用原生Proxy對象*
 
 ---
 
@@ -541,3 +594,4 @@ vue-router 模塊的 router-link 組件。
 * #### *[程式設計師應該知道的MVC，MVP，MVVM設計模式區別及優缺點](https://kknews.cc/zh-tw/news/8qzkmog.html "程式設計師應該知道的MVC，MVP，MVVM設計模式區別及優缺點")*
 * #### *[MVVM架構](https://ithelp.ithome.com.tw/articles/10192829 "MVVM架構")*
 * #### *[Vue Reactivity 響應式原理](https://chiafangsung.medium.com/vue-reactivity-%E9%9F%BF%E6%87%89%E5%BC%8F%E5%8E%9F%E7%90%86-ef4d2a14f908 "Vue Reactivity 響應式原理")*
+* #### *[常見的實現MVVM方式：發布者-訂閱者模式，髒值檢查，數據劫持](https://kknews.cc/zh-tw/code/69r8qlv.html "常見的實現MVVM方式：發布者-訂閱者模式，髒值檢查，數據劫持")*
