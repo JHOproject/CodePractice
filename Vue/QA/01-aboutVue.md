@@ -69,7 +69,9 @@ ViewModel 通過雙向數據綁定把 View 層和 Model 層連接了起來，而
 
 > ## 和 MVC、其它框架（jquery）的區別？哪些場景適合？
 mvc 和 mvvm 其實區別並不大。都是一種設計思想。主要就是 mvc 中 Controller 演變成 mvvm 中的 viewModel。mvvm 主要解決了 mvc 中大量的 DOM 操作使頁面渲染性能降低，加載速度變慢，影響用戶體驗。和當 Model 頻繁發生變化，開發者需要主動更新到 View 。
+
 ---
+
 # 二、關於 Vue
 
 > ## Vue 的優點
@@ -135,7 +137,9 @@ mvc 和 mvvm 其實區別並不大。都是一種設計思想。主要就是 mvc
 
 > ## VNode是什麼？虛擬 DOM 是什麼
 Vue在 頁面上渲染的節點，及其子節點稱為「虛擬節點 (Virtual Node)」，簡寫為「VNode」。「虛擬 DOM」是由 Vue 組件樹建立起來的整個 VNode 樹的稱呼。
+
 ---
+
 # 三、關於 Vue 的生命週期
 
 > ## 什麼是 Vue 生命周期
@@ -199,7 +203,9 @@ DOM 渲染在 mounted 中已經完成。
 
 * nextTick : 更新數據後立即操作 DOM。
 
+
 ---
+
 # 四、關於 Vue 的操作
 
 > ## Vue 的響應式原理（Vue Reactivity）
