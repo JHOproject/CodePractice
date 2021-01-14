@@ -101,14 +101,15 @@ mvc 和 mvvm 其實區別並不大。都是一種設計思想。主要就是 mvc
   * MVC 優點
 
     * 耦合性低，視圖層和業務層分離，這樣就允許更改視圖層代碼而不用重新編譯模型和控制器代碼。
+      > > #### *[什麼是耦合性](https://ithelp.ithome.com.tw/articles/10203659 "耦合性")*
     
     * 重用性高。
     
     * 生命周期成本低。
     
-    * MVC 使開發和維護用戶接口的技術含量降低。
+    * MVC 使開發和維護用戶接口（User Interface, UI）的技術含量降低。
     
-    * 可維護性高，分離視圖層和業務邏輯層也使得WEB應用更易於維護和修改部署快。
+    * 可維護性高，分離視圖層和業務邏輯層也使得 WEB 應用更易於維護和修改部署快。
   
   * MVC 缺點
     
@@ -196,6 +197,7 @@ mvc 和 mvvm 其實區別並不大。都是一種設計思想。主要就是 mvc
   這種方式現在畢竟太low了，我們更希望通過 `vm.property = value`這種方式更新數據，同時自動更新視圖，於是有了下面兩種方式。
 
 * 髒值檢查（angular.js）
+  
   angular.js 是通過髒值檢測的方式比對數據是否有變更，來決定是否更新視圖，最簡單的方式就是通過 `setInterval()` 定時輪詢檢測數據變動。
 
   angular 只有在指定的事件觸發時進入髒值檢測，大致如下：
@@ -208,7 +210,7 @@ mvc 和 mvvm 其實區別並不大。都是一種設計思想。主要就是 mvc
 
 * 數據劫持（vue.js）
 
-  vue.js 則是採用數據劫持結合發布者-訂閱者模式的方式，通過 `Object.defineProperty()`來劫持各個屬性的 setter，getter，在數據變動時發布消息給訂閱者，觸發相應的監聽回調。
+  vue.js 則是採用數據劫持結合發布者-訂閱者模式的方式，通過 `Object.defineProperty()`來劫持各個屬性的 setter / getter，在數據變動時發布消息給訂閱者，觸發相應的監聽回調。
 
   ##### *補充：在Vue3.0放棄了 `Object.defineProperty()` ，採用原生 Proxy 對象*
 
@@ -217,13 +219,13 @@ mvc 和 mvvm 其實區別並不大。都是一種設計思想。主要就是 mvc
 # 二、關於 Vue
 
 > ## Vue 的優點
-* 低耦合：視圖（View）可以獨立於 Model 變化和修改，一個 ViewModel 可以綁定到不同的”View”上，當 View 變化的時候 Model 可以不變，當 Model 變化的時候 View 也可以不變。
-* 可重用性：你可以把一些視圖邏輯放在一個 ViewModel 裡面，讓很多 view 重用這段視圖邏輯。
-* 獨立開發：開發人員可以專注於業務邏輯和數據的開發（ViewModel），設計人員可以專注於頁面設計，使用 Expression Blend 可以很容易設計界面並生成 xml 代碼。
+* 低耦合：視圖（View）可以獨立於 Model 變化和修改，一個 ViewModel 可以綁定到不同的 View 上，當 View 變化的時候 Model 可以不變，當 Model 變化的時候 View 也可以不變。
+* 可重用性：可以把一些視圖邏輯放在一個 ViewModel 裡面，讓很多 view 重用這段視圖邏輯。
+* 獨立開發：開發人員可以專注於業務邏輯和數據的開發（ViewModel），設計人員可以專注於頁面設計，使用 Expression Blend 可以很容易設計界面並生成 XML 代碼。
 * 可測試：界面素來是比較難於測試的，而現在測試可以針對 ViewModel 來寫。
 
 > ## 描述 Vue 從「初始化頁面→修改資料重新整理頁面→UI」的過程
-當 Vue 進入初始化階段時，一方面 Vue 會遍歷 data 中的屬性，並用 `Object.defineProperty` 將它轉化成 getter / setter 的形式，實現資料劫持(暫不談 Vue3.0 的 Proxy)；另一方面，Vue 的指令編譯器 Compiler 對元素節點的各個指令進行解析，初始化檢視，並訂閱 Watcher 來更新試圖，此時 Watcher 會將自己新增到訊息訂閱器 Dep 中，此時初始化完畢。
+當 Vue 進入初始化階段時，一方面 Vue 會遍歷 data 中的屬性，並用 `Object.defineProperty` 將它轉化成 getter / setter 的形式，實現資料劫持（暫不談 Vue3.0 的 Proxy）；另一方面，Vue 的指令編譯器 Compiler 對元素節點的各個指令進行解析，初始化檢視，並訂閱 Watcher 來更新試圖，此時 Watcher 會將自己新增到訊息訂閱器 Dep 中，此時初始化完畢。
 當資料發生變化時，觸發 Observer 中 setter 方法，立即呼叫 `Dep.notify()`，Dep 這個陣列開始遍歷所有的訂閱者，並呼叫其 update 方法，Vue 內部再通過 diff 演算法，patch 相應的更新完成對訂閱者檢視的改變。
 
 > ## Vue 和 React 的簡單對比
@@ -233,7 +235,7 @@ mvc 和 mvvm 其實區別並不大。都是一種設計思想。主要就是 mvc
 
   * React 預設是通過比較引用的方式進行的，如果不優化，每當應用的狀態被改變時，全部子元件都會重新渲染，可能導致大量不必要的 VDOM 的重新渲染。
 
-  Vue 不需要特別的優化就能達到很好的效能，而對於 React 而言，需要通過 PureComponent/shouldComponentUpdate 這個生命週期方法來進行控制。如果你的應用中，互動複雜，需要處理大量的 UI 變化，那麼使用 Virtual DOM 是一個好主意。如果你更新元素並不頻繁，那麼 Virtual DOM 並不一定適用，效能很可能還不如直接操控 DOM。
+  Vue 不需要特別的優化就能達到很好的效能，而對於 React 而言，需要通過 PureComponent / shouldComponentUpdate 這個生命週期方法來進行控制。如果你的應用中，互動複雜，需要處理大量的 UI 變化，那麼使用 Virtual DOM 是一個好主意。如果你更新元素並不頻繁，那麼 Virtual DOM 並不一定適用，效能很可能還不如直接操控 DOM。
 
   為什麼 React 不精確監聽資料變化呢？這是因為 Vue React 設計理念上的區別，Vue 使用的是可變資料，React 更強調資料的不可變。
 
@@ -241,7 +243,7 @@ mvc 和 mvvm 其實區別並不大。都是一種設計思想。主要就是 mvc
 
   * Vue 中預設支援雙向繫結，元件與 DOM 之間可以通過 v-model 雙向繫結。但是，父子元件之間，props 在 2.x 版本是單向資料流。
 
-  * React 一直提倡的是單向資料流，他稱之為 onChange/setState()模式。
+  * React 一直提倡的是單向資料流，他稱之為 `onChange` / `setState()` 模式。
   
   不過由於我們一般都會用 Vuex 以及 Redux 等單向資料流的狀態管理框架，因此很多時候我們感受不到這一點的區別了。
 
@@ -264,21 +266,21 @@ mvc 和 mvvm 其實區別並不大。都是一種設計思想。主要就是 mvc
 > ## Vue 的 nextTick 原理為何
 * 為什麼需要 nextTick
 
-  Vue 是非同步修改 DOM 的並且不鼓勵開發者直接接觸 DOM，但有時候業務需要必須對資料更改--重新整理後的 DOM 做相應的處理，這時候就可以使用 `Vue.nextTick(callback)` 這個 api 了。
+  Vue 是非同步修改 DOM 的並且不鼓勵開發者直接接觸 DOM，但有時候業務需要必須對資料更改--重新整理後的 DOM 做相應的處理，這時候就可以使用 `Vue.nextTick(callback)` 這個 API 了。
 
 * 理解原理前的準備
   
-  首先需要知道事件迴圈中巨集任務和微任務這兩個概念（這其實也是面試常考點）。
+  首先需要知道事件迴圈中 ***巨集任務*** 和 ***微任務*** 這兩個概念（這其實也是面試常考點）。
 
-  * 常見的巨集任務： `script, setTimeout, setInterval, setImmediate, I/O, UI rendering`。
-  * 常見的微任務： `process.nextTick(Nodejs), Promise.then(), MutationObserver`。
+  * 常見的巨集任務： `script`, `setTimeout`, `setInterval`, `setImmediate`, `I/O`, `UI rendering`。
+  * 常見的微任務： `process.nextTick(Nodejs)`, `Promise.then()`, `MutationObserver`。
 
 * 理解 nextTick
 
   而 nextTick 的原理正是 vue 通過非同步佇列控制 DOM 更新和 nextTick 回撥函式先後執行的方式。如果大家看過這部分的原始碼，會發現其中做了很多 `isNative()` 的判斷，因為這裡還存在相容性優雅降級的問題。可見 Vue 開發團隊的深思熟慮，對效能的良苦用心。
 
 > ## VNode是什麼？虛擬 DOM 是什麼
-Vue在 頁面上渲染的節點，及其子節點稱為「虛擬節點 (Virtual Node)」，簡寫為「VNode」。「虛擬 DOM」是由 Vue 組件樹建立起來的整個 VNode 樹的稱呼。
+Vue 在 頁面上渲染的節點，及其子節點稱為「虛擬節點 （Virtual Node）」，簡寫為「VNode」。「虛擬 DOM」是由 Vue 組件樹建立起來的整個 VNode 樹的稱呼。
 
 ---
 
