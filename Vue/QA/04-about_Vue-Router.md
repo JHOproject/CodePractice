@@ -1,8 +1,21 @@
+# 目錄
+* 關於 Vue-router
+  * 1.怎麼定義vue-router的動態路由以及如何獲取傳過來的動態參數
+  * 2.vue-router 有哪幾種導航鉤子
+  * 3.vue-router 的鉤子函式
+  * 4.route 和 router 的區別
+  * 5.路由之間跳轉
+  * 6.嵌套路由怎麼定義
+
+---
+
 # 關於 Vue-router
-> ## 怎麼定義vue-router的動態路由以及如何獲取傳過來的動態參數
+
+> ## 1. 怎麼定義vue-router的動態路由以及如何獲取傳過來的動態參數
 * 在router目錄下的 `index.js` 文件中，對 path 屬性加上 `/:id`。
 * 使用 router 對象的 `params.id`。
-> ## vue-router 有哪幾種導航鉤子
+
+> ## 2. vue-router 有哪幾種導航鉤子
 以下三種：
 * 全局導航鉤子
   ```javascript
@@ -20,17 +33,20 @@
   ```javascript
   beforeEnter
   ```
-> ## vue-router 的鉤子函式
+
+> ## 3. vue-router 的鉤子函式
 （官方文件：vue-router鉤子函式）
 * 全域性前置守衛 router.beforeEach
 * 全域性解析守衛 router.beforeResolve
 * 全域性後置鉤子 router.afterEach
 * 路由獨享的守衛 beforeEnter
 * 元件內的守衛 beforeRouteEnter、beforeRouteUpdate、beforeRouteLeave
-> ## route 和 router 的區別
+
+> ## 4. route 和 router 的區別
 route 是「路由資訊物件」，包括 path、params、hash、query、fullPath、matched、name 等路由資訊引數。
 router 是「路由例項物件」，包括了路由的跳轉方法（push、replace），鉤子函式等。
-> ## 路由之間跳轉
+
+> ## 5. 路由之間跳轉
 * 聲明式（標籤跳轉）
 * 編程式（ js 跳轉） router.push(‘index’)
 * 懶加載（按需加載路由）（常考）
@@ -45,7 +61,7 @@ router 是「路由例項物件」，包括了路由的跳轉方法（push、rep
   const  home = r => require.ensure( [], () => r (require('../../common/home.vue')))
   ```
 
-> ## 嵌套路由怎麼定義
+> ## 6. 嵌套路由怎麼定義
 在實際項目中我們會碰到多層嵌套的組件組合而成，但是我們如何實現嵌套路由呢？因此我們需要在 VueRouter 的參數中使用 children 配置，這樣就可以很好的實現路由嵌套。
 * index.html，只有一個路由出口。
   ```javascript
@@ -86,6 +102,7 @@ router 是「路由例項物件」，包括了路由的跳轉方法（push、rep
   ```
 
 ---
+
 #
 #### *內文來源*
 * #### *[2019前端面試題彙總（主要為Vue）](https://www.mdeditor.tw/pl/2U6o/zh-tw"2019前端面試題彙總（主要為Vue）")*

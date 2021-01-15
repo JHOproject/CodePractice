@@ -1,6 +1,19 @@
+# 目錄
+* 關於 Vue-router
+  * 1.什麼是 vue-cli
+  * 2.vue.cli 中怎樣使用自定義的組件
+  * 3.scss是什麼？在vue.cli中的安裝使用步驟是？有哪幾大特性
+  * 4.構建的 vue-cli 工程都到了哪些技術，它們的作用分別是什麼
+  * 5.vue-cli 工程常用的 npm 命令有哪些
+  * 6.請說出 vue-cli 工程中每個資料夾和檔案的用處
+  * 7.config資料夾下 `index.js` 的對於工程開發環境和生產環境的配置
+  * 8.請詳細介紹一些 package.json 裡面的配置
+
+---
+
 # 關於 Vue-cli
 
-> ## 什麼是 vue-cli
+> ## 1. 什麼是 vue-cli
  * 它是基於 Vue.js 進行快速開發的完整系統，也可以理解成是很多 npm 包的集合。
 
   * vue-cli 完成的功能
@@ -18,7 +31,8 @@
     * 定義環境變數，區分 dev 和 production 模式。
 
   * 如果開發者需要補充或修改預設設定，需要在 package.json 同級下新建一個 vue.config.js 檔案。
-> ## vue.cli 中怎樣使用自定義的組件
+
+> ## 2. vue.cli 中怎樣使用自定義的組件
 * 第一步
   
   在 components 目錄新建你的組件文件（indexPage.vue），`script` 一定要 `export default {}`。
@@ -34,7 +48,8 @@
 * 第四步
   
   在 template 視圖 view 中使用，例如有 indexPage 命名，使用的時候則 `index-page`。
-> ## scss是什麼？在vue.cli中的安裝使用步驟是？有哪幾大特性
+
+> ## 3. scss是什麼？在vue.cli中的安裝使用步驟是？有哪幾大特性
 * scss 是 css 的預編譯。
 * 使用步驟
   * 第一步
@@ -59,16 +74,19 @@
     * 可以用混合器。
 
     * 可以嵌套。
-> ## 構建的 vue-cli 工程都到了哪些技術，它們的作用分別是什麼
-> ## vue-cli 工程常用的 npm 命令有哪些
 
-> ## 請說出 vue-cli 工程中每個資料夾和檔案的用處
+> ## 4. 構建的 vue-cli 工程都到了哪些技術，它們的作用分別是什麼
 
-> ## config資料夾下 `index.js` 的對於工程開發環境和生產環境的配置
+> ## 5. vue-cli 工程常用的 npm 命令有哪些
 
-> ## 請詳細介紹一些 package.json 裡面的配置
+> ## 6. 請說出 vue-cli 工程中每個資料夾和檔案的用處
+
+> ## 7. config資料夾下 `index.js` 的對於工程開發環境和生產環境的配置
+
+> ## 8. 請詳細介紹一些 package.json 裡面的配置
 
 ---
+
 #
 #### *內文來源*
 * #### *[2019前端面試題彙總（主要為Vue）](https://www.mdeditor.tw/pl/2U6o/zh-tw"2019前端面試題彙總（主要為Vue）")*
