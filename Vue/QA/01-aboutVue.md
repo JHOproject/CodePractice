@@ -46,7 +46,7 @@
 # 一、關於 MVVM
 
 > ## 什麼是 MVVM
-**<回答1>**
+#### **<回答1>**
 
 MVVM 是 Model-View-ViewModel 的縮寫。MVVM 是一種設計思想，共分為 Model、View、ViewModel 三者：
 
@@ -69,7 +69,7 @@ MVVM 是 Model-View-ViewModel 的縮寫。MVVM 是一種設計思想，共分為
   
   這種模式實現了 Model 和 View 的資料自動同步，因此開發者只需要專注對資料的維護操作即可，而不需要自己操作 DOM。
 
-**<回答2>**
+#### **<回答2>**
 
 MVVM 是 Model-View-ViewModel 的縮寫。MVVM 是一種設計思想。Model 層代表數據模型，也可以在 Model 中定義數據修改和操作的業務邏輯；View 代表 UI 組件，它負責將數據模型轉化成 UI 展現出來，ViewModel 是一個同步 View 和 Model 的對象。
 
@@ -77,12 +77,26 @@ MVVM 是 Model-View-ViewModel 的縮寫。MVVM 是一種設計思想。Model 層
 
 ViewModel 通過雙向數據綁定把 View 層和 Model 層連接了起來，而 View 和 Model 之間的同步工作完全是自動的，無需人為干涉，因此開發者只需關注業務邏輯，不需要手動操作 DOM, 不需要關注數據狀態的同步問題，複雜的數據狀態維護完全由 MVVM 來統一管理。
 
+#### **<回答3>**
+MVVM，是 Model、View、ViewModel 三者的縮寫，它是一種程式的設計框架，是一種設計思路。不同的人實現 MVVM，所用的構成技術、實現以後的效能都是不一樣的。千萬不要覺得它有多深奧，他其實就是由一系列程式碼（或技術）構成的一個程式的底座。我們在良好底座上開發出來的程式穩定性更高，可擴充套件性更強。
+
+下面我們挨個來來說 Model、View、ViewModel。
+
+1.Model：資料提供。
+Model在程式中專門用於提供資料，不管是網路請求獲得的資料，還是資料庫獲得的資料，統統寫在Model裡。Model層獨立性相當強，它只用來提供資料，而不管資料是用來做什麼的。
+
+2.View：檢視元素和檢視元素初始化。
+View 在 Android 中指代的就是我們常見的佈局檔案和 Activity 中的元素初始化部分。總之，所有一切我們在 Android 上肉眼能看見的東西都是 View。在 View 層裡，我只對 UI 做初始化，比如將 TextView 設定字型大小，為 Banner 控制元件設定滾動速度等等，這些大多可以直接在佈局檔案中完成。
+
+3.ViewModel：操作業務資料，並將資料呈現在View上。
+ViewModel 根據業務需要，從 Model 層調取相關資料，然後更新 View 層相關元素。
+
 > ## 和 MVC、MVP 其它框架（jquery）的區別？哪些場景適合？
-**<回答1>**
+#### **<回答1>**
 
 mvc 和 mvvm 其實區別並不大。都是一種設計思想。主要就是 mvc 中 Controller 演變成 mvvm 中的 viewModel。mvvm 主要解決了 mvc 中大量的 DOM 操作使頁面渲染性能降低，加載速度變慢，影響用戶體驗。和當 Model 頻繁發生變化，開發者需要主動更新到 View 。
 
-**<回答2>**
+#### **<回答2>**
 
 * MVC（Model View Controller）
   
@@ -189,6 +203,108 @@ mvc 和 mvvm 其實區別並不大。都是一種設計思想。主要就是 mvc
 
 各種架構模式的作用就是分離關注，將屬於不同模塊的功能分散到合適的位置中，同時儘量降低各個模塊的相互依賴並且減少需要聯繫的膠水代碼。文中對於 MVC、MVP 和 MVVM 架構模式的描述很難不摻雜作者的主觀意見，如果對文章中的內容有疑問，歡迎提出不同的意見進行討論。
 
+#### **<回答3>**
+
+如果是一個人開發 App，不會有人管你怎麼寫、怎麼設計，反正自己開心就好。
+
+但是如果是一群人同時在開發一個 App，這時候，層次分明、分工明確、模組化的設計架構就相當重要了，不但看起來賞心悅目，對於程式的維護性、修改性、還有效能都能大大的提升，從好幾個人開發一個 App，變成一個團體為了一個共同的目標在合作。
+
+* MVC
+  說到設計架構，最一開始的就是 MVC，MVC 是Model-View-Controller 的縮寫，Model 處理數據，View 顯示畫面，Controller 則是兩者的一個橋樑。
+
+  ![MVC](./img/MVC2.png)
+
+  View 與使用者直接互動，當 View 接收到使用者的回饋需要拿資料時（ex: 點擊下一頁的按鈕執行換頁），呼叫 Controller，請 Controller 操作 Model 拿取想要的資料，Model 拿到資料後直接把資料丟回給 View，把資料顯示給使用者。
+  
+  以上大致上是 MVC 的運作流程，一般沒有去特別設計什麼架構的話大概都是 MVC 模式。
+  
+  * 優點
+
+    * 非常的直覺，好懂。
+  
+    * 使用 Controller 將 Model 和 View 分開來，具有一定程度的解耦合。
+
+  * 缺點
+  
+    * Controller 跟 View 相互依賴，一但更新了 View，Controller 也必須跟著修改。
+  
+    * 隨著不斷的開發和添加功能，Controller 的代碼會越來越臃腫。
+    
+    * 難以進行單元測試。
+
+      > > #### *[什麼是單元測試](https://zh.wikipedia.org/wiki/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95#%E5%88%86%E7%A6%BB%E6%8E%A5%E5%8F%A3%E5%92%8C%E5%AE%9E%E7%8E%B0)*
+
+      > > #### *[為什麼要寫單元測試](https://progressbar.tw/posts/11 "為什麼要寫單元測試")*
+
+      > > #### *[Unit Test 教學：核心觀念](https://medium.com/@ji3g4kami/unit-test-%E6%95%99%E5%AD%B8-ba39e54fcbc5 "Unit Test 教學：核心觀念")*
+
+      >> #### *[JavaScript的單元測試](https://medium.com/@bebebobohaha/%E5%89%8D%E7%AB%AF%E5%96%AE%E5%85%83%E6%B8%AC%E8%A9%A6%E5%85%A5%E9%96%80-mocha%E8%88%87chai-b3037b3a1de1 "")*
+  
+* MVP
+
+  為了改善以上的缺點（主要是單元測試），MVP 將 Controller 換成了 Presenter。
+
+  ![MVP](./img/MVP2.png)
+
+  和 MVC 不同的是，Model 層拿到數據後，並不直接傳給 View 更新，而是交還給 Presenter，Presenter 再把數據交給 View，並更新畫面。
+
+  * 優點
+
+    * 責任分明，分工明確
+      
+      View 只負責收到使用者回饋後，呼叫 Presenter 拿取數據，並在接收到數據的時候，更新畫面。
+
+      Model 被動的接收到 Presenter 命令，拿取資料，並回傳給 Presenter。
+
+      Presenter 透過介面與 View 和 Model 溝通，是 View 和 Model 的唯一連結窗口。
+
+    * 方便進行單元測試　
+      
+      由於 Presenter 對 View 是透過介面進行操作，在對 Presenter 進行不依賴 UI 環境的單元測試的時候，可以 Mock 一個 View 對象，單元測試的時候就可以完整的測試 Presenter 業務邏輯的正確性。
+
+  * 缺點
+
+    隨著不斷的開發和添加功能，Presenter 的代碼會越來越臃腫。
+
+* MVVM
+
+  不管是 MVC 還是 MVP，都無法避免 Presenter（Controller） 的代碼會越來越臃腫的問題，如果能達到一樣的效果（外部行為），程式碼當然是越少越好囉（內部行為），於是 MVVM 誕生了。
+
+  ![MVVM](./img/MVVM2.png)
+
+  Model-View-ViewModel 透過觀察者模式將 View 和 Model 巧妙地連接在一起，一旦 Model 的數據發生變化，觀察者 View 就能夠感應到這個更動，並把數據更新到 UI 畫面上，ViewModel 甚至不需要持有 View 的引用，更方便進行單元測試。
+  
+  * 優點
+
+    * 很潮
+    
+    * 大幅減少代碼量，省去了 MVP 中用來連接彼此的介面，Model 層數據更新後也不必透過介面 callback 給 view，因為 View 會透過 observe 感知數據的變動並更新畫面。
+
+    * 可以搭配 DataBinding、LiveData 等框架使用，能更方便地處理 UI 的更新，生命週期的處理。
+
+    * ViewModel 能夠輕易地保存數據，且可以被多個 View 共享（MVC、MVP 也可以），View 與 View 之間傳遞數據也更方便（只有 MVVM 可以）。
+  
+  * 缺點
+    
+    入行門檻、學習成本較高，且常常需要搭配 DataBinding、LiveData 等框架，才能發揮最大效益。
+
+#### **<回答4>**
+
+  [前往了解 MVVM 歷史](https://codertw.com/%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80/693368/ "前往了解 MVVM 歷史")
+
+> ## 為什麼要使用 MVVM
+使用 MVVM 後，程式會有以下變化：
+
+1. MVVM 並不會提升程式的效能，甚至如果用不好還會降低效能。
+
+2. MVVM 會增大程式碼的總量。
+
+3. 閱讀 MVVM 的程式碼你必須不停的跳來跳去，跳到你噁心想吐。
+
+4. MVVM將讓你的程式完全解耦。當然，是正確使用的前提下。
+
+為了最後這一條，我們用前3條的犧牲完全不過分，真正寫程式碼的時候，我們面對的往往不是效能的些許提升，也不是幾十或幾百K的包大小增大帶來的問題，而是程式不停迭代所帶來的程式穩定性要求。而這也是MVVM大顯身手的地方，MVVM能夠完全讓你的業務功能元件化，讓我們需要什麼就調什麼，並且元件可以在不同頁面之間複用；在寫業務元件的時候，我們可以完全集中精力，只管寫元件要完成的功能，而無需分神它顧。
+
 > ## 常見的實現 MVVM 幾種方式
 * 發布者-訂閱者模式（backbone.js）
 
@@ -294,7 +410,7 @@ Vue 實例從創建到銷毀的過程，就是生命周期。也就是從開始�
 
 > ## Vue 生命周期總共有幾個階段
 
-**<回答1>**
+#### **<回答1>**
 
 * beforeCreate 和 created
 
@@ -306,7 +422,7 @@ Vue 實例從創建到銷毀的過程，就是生命周期。也就是從開始�
 
 * activated 和 deactivated
 
-**<回答2>**
+#### **<回答2>**
 
 總共分為8個階段創建前/後，載入前/後，更新前/後，銷毀前/後。
 
@@ -358,11 +474,11 @@ DOM 渲染在 mounted 中已經完成。
 <!-- TODO:什麼是例項? -->
 
 > ## Vue 的雙向綁定原理
-**<回答1>**
+#### **<回答1>**
 * 父元件通過 props 傳值給子元件，子元件通過 $emit 來通知父元件修改相應的props值。在父元件中做了兩件事，一是給子元件傳入props，二是監聽input事件並同步自己的value屬性。
 * v-model（幫我們完成上面的兩步操作）。
 
-**<回答2>**
+#### **<回答2>**
 
 vue.js 是採用數據劫持結合發佈者 - 訂閱者模式的方式，通過 `Object.defineProperty()` 來劫持各個屬性的 setter，getter，在數據變動時發佈消息給訂閱者，觸發相應的監聽回調。
 
@@ -400,7 +516,7 @@ vue.js 是採用數據劫持結合發佈者 - 訂閱者模式的方式，通過 
 
 > ## Vue 元件間通訊的方式（組件間的傳值）
 
-**<回答1>**
+#### **<回答1>**
 
 * 父組件與子組件傳值
 
@@ -412,7 +528,7 @@ vue.js 是採用數據劫持結合發佈者 - 訂閱者模式的方式，通過 
 
   * 子組件通過$emit方法傳遞參數
 
-**<回答2>**
+#### **<回答2>**
 
 Vue 元件間 6 種通訊方式
 * props / $emit
@@ -445,11 +561,11 @@ webpack 中提供了 `require.ensure()` 來實現按需加載。以前引入路�
 提供一個在頁面上已存在的 DOM 元素作為 Vue 實例的掛載目標，可以是 CSS 選擇器，也可以是一個 HTMLElement 實例。
 
 > ## v-if 和 v-show 的區別
-**<回答1>**
+#### **<回答1>**
 
 v-show 僅僅控制元素的顯示方式，將 display 屬性在 block 和 none 來回切換；而v-if會控制這個 DOM 節點的存在與否。當我們需要經常切換某個元素的顯示/隱藏時，使用 v-show 會更加節省效能；當只需要一次顯示或隱藏時，使用 v-if 更加合理。
 
-**<回答2>**
+#### **<回答2>**
 
 v-show 指令是通過修改元素的 display CSS 屬性讓其顯示或者隱藏；v-if 指令是直接銷燬和重建 DOM 達到讓元素顯示和隱藏的效果。
 
@@ -587,6 +703,7 @@ vue-router 模塊的 router-link 組件。
 * 加一個首屏 loading 圖，提升使用者體驗
 
 ---
+
 #
 #### *內文來源*
 * #### *[2019前端面試題彙總（主要為Vue）](https://www.mdeditor.tw/pl/2U6o/zh-tw"2019前端面試題彙總（主要為Vue）")*
@@ -598,3 +715,6 @@ vue-router 模塊的 router-link 組件。
 * #### *[MVVM架構](https://ithelp.ithome.com.tw/articles/10192829 "MVVM架構")*
 * #### *[Vue Reactivity 響應式原理](https://chiafangsung.medium.com/vue-reactivity-%E9%9F%BF%E6%87%89%E5%BC%8F%E5%8E%9F%E7%90%86-ef4d2a14f908 "Vue Reactivity 響應式原理")*
 * #### *[常見的實現MVVM方式：發布者-訂閱者模式，髒值檢查，數據劫持](https://kknews.cc/zh-tw/code/69r8qlv.html "常見的實現MVVM方式：發布者-訂閱者模式，髒值檢查，數據劫持")*
+* #### *[一篇文章徹底弄懂Android-MVVM](https://www.mdeditor.tw/pl/ptbs/zh-tw "一篇文章徹底弄懂Android-MVVM")*
+* #### *[Day 5 淺談 Android 設計架構 MVC、MVP、MVVM](https://ithelp.ithome.com.tw/articles/10218263 "Day 5 淺談 Android 設計架構 MVC、MVP、MVVM")*
+* #### *[前端面試題：這是我理解的MVVM，請注意查收](https://codertw.com/%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80/693368/ "前端面試題：這是我理解的MVVM，請注意查收")*
