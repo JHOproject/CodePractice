@@ -1,5 +1,5 @@
 # 目錄
-* 關於 Vue-router
+* 關於 Vuex
   * 1.什麼是 Vuex（Vuex 原理）
   * 2.Vuex 有幾種屬性
   * 3.Vuex 的 store 特性是什麼
