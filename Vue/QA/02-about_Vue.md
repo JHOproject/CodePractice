@@ -43,16 +43,23 @@
 # 一、關於 Vue
 
 > ## 1-1. Vue 的優點
+
 * 低耦合：視圖（View）可以獨立於 Model 變化和修改，一個 ViewModel 可以綁定到不同的 View 上，當 View 變化的時候 Model 可以不變，當 Model 變化的時候 View 也可以不變。
+
 * 可重用性：可以把一些視圖邏輯放在一個 ViewModel 裡面，讓很多 view 重用這段視圖邏輯。
+
 * 獨立開發：開發人員可以專注於業務邏輯和數據的開發（ViewModel），設計人員可以專注於頁面設計，使用 Expression Blend 可以很容易設計界面並生成 XML 代碼。
+
 * 可測試：界面素來是比較難於測試的，而現在測試可以針對 ViewModel 來寫。
 
 > ## 1-2. 描述 Vue 從「初始化頁面→修改資料重新整理頁面→UI」的過程
+
 當 Vue 進入初始化階段時，一方面 Vue 會遍歷 data 中的屬性，並用 `Object.defineProperty` 將它轉化成 getter / setter 的形式，實現資料劫持（暫不談 Vue3.0 的 Proxy）；另一方面，Vue 的指令編譯器 Compiler 對元素節點的各個指令進行解析，初始化檢視，並訂閱 Watcher 來更新試圖，此時 Watcher 會將自己新增到訊息訂閱器 Dep 中，此時初始化完畢。
+
 當資料發生變化時，觸發 Observer 中 setter 方法，立即呼叫 `Dep.notify()`，Dep 這個陣列開始遍歷所有的訂閱者，並呼叫其 update 方法，Vue 內部再通過 diff 演算法，patch 相應的更新完成對訂閱者檢視的改變。
 
 > ## 1-3. Vue 和 React 的簡單對比
+
 * 監聽資料變化的實現原理不同
   
   * Vue 通過 getter/setter 以及一些函式的劫持，能精確快速的計算出 Virtual DOM 的差異。這是由於它在渲染過程中，會跟蹤每一個元件的依賴關係，不需要重新渲染整個元件樹。
